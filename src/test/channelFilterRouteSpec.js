@@ -4,7 +4,8 @@ var channelFilterRoutes = [
   'framework/category/search',
   'framework/term/search',
   'search',
-  'framework/list'
+  'framework/list',
+  'domains/:test1/:test2/search'
 ]
 
 var requestMiddleware = require('../middlewares/request.middleware')

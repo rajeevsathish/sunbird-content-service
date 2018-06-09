@@ -24,7 +24,14 @@ var req1 = {
     }
   }
 }
-
+var req2 = {
+  'body': {
+    'request': {
+      'filters': {
+      }
+    }
+  }
+}
 describe('filter of channels', function () {
   it('check if request is there then do next', function () {
     requestMiddleware.addChannelFilters(req, {}, function () {
@@ -44,10 +51,11 @@ describe('filter of channels', function () {
     })
   })
   it('check for getChannelSearchString method creates proper blacklisted search string', function () {
+    configUtil.setConfig('CHANNEL_FILTER_QUERY_STRING', '')
     var blacklist = {'ne': ['in.ekstep', '505c7c48ac6dc1edc9b08f21db5a571d', 'b00bc992ef25f1a9a8d63291e20efc8d']}
     configUtil.setConfig('CHANNEL_FILTER_QUERY_STRING', blacklist)
-    requestMiddleware.addChannelFilters(req1, {}, function () {
-      expect(req1.body.request.filters.channel).toEqual(blacklist)
+    requestMiddleware.addChannelFilters(req2, {}, function () {
+      expect(req2.body.request.filters.channel).toEqual(blacklist)
     })
   })
 })
